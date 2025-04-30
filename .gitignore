@@ -1,0 +1,14 @@
+.venv/
+venv/
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+pip-log.txt
+
+.Python
+build/
+develop-eggs/
+dist/
+*.egg-info/

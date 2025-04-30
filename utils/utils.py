@@ -1,5 +1,5 @@
 import cv2
+import numpy as np
 
-def save_tensor(tensor, output_path):
-    array = tensor.squeeze(0).permute(1, 2, 0).numpy()
-    cv2.imwrite(output_path, cv2.cvtColor(array, cv2.COLOR_RGB2BGR))
+def save_img(image, output_path):
+    cv2.imwrite(output_path, cv2.cvtColor(np.array(image).squeeze(0), cv2.COLOR_BGR2RGB))

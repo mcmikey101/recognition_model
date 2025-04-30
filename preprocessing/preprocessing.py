@@ -1,20 +1,18 @@
 import cv2
 import dlib
 import imutils
-import face_utils
+from imutils import face_utils
 from ultralytics import YOLO
 import math
-from torchvision.transforms import transforms
-
 
 class Preprocessor:
     def __init__(self, yolo_model, dlib_model, target_size=224):
-        self.detector = YOLO(yolo_model)
+        self.detect = YOLO(yolo_model)
         self.predictor = dlib.shape_predictor(dlib_model)
         self.target_size = target_size
 
     def detect_faces(self, image):
-        results = self.detector(image)
+        results = self.detect(image)
         boxes = []
         for result in results:
             for box in result.boxes.xyxy.cpu().numpy():
@@ -36,12 +34,12 @@ class Preprocessor:
         cropped = imutils.rotate(cropped, 180 + alpha)
         return cv2.resize(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB), (224, 224))
 
-    def preprocess(self, image_path, mode='train'):
+    def preprocess(self, image_path):
         image = cv2.imread(image_path)
         faces = []
         boxes = self.detect_faces(image)
 
         for box in boxes:
-            aligned = self.align_and_crop(image, box)
+            aligned = self.align_face(image, box)
             faces.append(aligned)
         return faces
