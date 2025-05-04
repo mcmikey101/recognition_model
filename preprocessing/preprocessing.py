@@ -34,8 +34,7 @@ class Preprocessor:
         cropped = imutils.rotate(cropped, 180 + alpha)
         return cv2.resize(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB), (112, 112))
 
-    def preprocess(self, image_path):
-        image = cv2.imread(image_path)
+    def preprocess(self, image):
         faces = []
         boxes = self.detect_faces(image)
 
