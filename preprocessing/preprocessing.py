@@ -35,10 +35,7 @@ class Preprocessor:
         return cv2.resize(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB), (112, 112))
 
     def preprocess(self, image):
-        faces = []
-        boxes = self.detect_faces(image)
+        box = self.detect_faces(image)
 
-        for box in boxes:
-            aligned = self.align_face(image, box)
-            faces.append(aligned)
-        return faces
+        aligned = self.align_face(image, box[0])
+        return aligned

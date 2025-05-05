@@ -1,8 +1,8 @@
 import argparse
-from preprocessing.preprocessing import Preprocessor
-import utils
-import os
-import numpy as np
+from datasets.datasets import ImgDataset
+from torchvision.transforms import transforms
+from torch.utils.data import DataLoader
+import matplotlib.pyplot as plt
 
 def main():
     parser = argparse.ArgumentParser()
@@ -13,19 +13,12 @@ def main():
     parser.add_argument('--processed_path', type=str, required=True)
     args = parser.parse_args()
 
-    os.makedirs(args.processed_path, exist_ok=True)
-
-    base_imgs = utils.read_rec(args.rec_path, args.idx_path)
-
-    preprocessor = Preprocessor(args.yolo_path, args.dlib_path)
-    c = 0
-    for i in base_imgs:
-        batch = base_imgs.next()
-        data = batch.data[0].asnumpy().astype(np.uint8).squeeze(0).transpose((1, 2, 0))
-        data = preprocessor.preprocess(data)
-        for face in data:
-            utils.save_img(face, args.processed_path + "/" + f'image_{c}.jpg')
-        c += 1
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    ])
+    
+    dataset = ImgDataset(args.rec_path, args.idx_path, args.yolo_path, args.dlib_path, transform=transform)
 
 if __name__ == '__main__':
     main()
