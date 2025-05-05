@@ -10,7 +10,6 @@ def main():
     parser.add_argument('--dlib_path', type=str, required=True)
     parser.add_argument('--rec_path', type=str, required=True)
     parser.add_argument('--idx_path', type=str, required=True)
-    parser.add_argument('--processed_path', type=str, required=True)
     args = parser.parse_args()
 
     transform = transforms.Compose([
