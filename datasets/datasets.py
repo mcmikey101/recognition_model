@@ -22,7 +22,6 @@ class ImgDataset(Dataset):
 
         header, img = recordio.unpack_img(record, iscolor=1)
         img = self.preprocessor.preprocess(img)
-        print(type(img), img.shape)
         img = Image.fromarray(img.astype(np.uint8))
         label = int(header.label)
 

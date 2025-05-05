@@ -36,6 +36,5 @@ class Preprocessor:
 
     def preprocess(self, image):
         box = self.detect_faces(image)
-
         aligned = self.align_face(image, box[0])
         return aligned
