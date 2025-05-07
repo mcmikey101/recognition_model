@@ -12,3 +12,8 @@ build/
 develop-eggs/
 dist/
 *.egg-info/
+
+weights
+outputs
+
+.DS_Store

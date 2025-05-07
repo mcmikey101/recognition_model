@@ -1,0 +1,5 @@
+_target_: loss.arcface.ArcFaceLoss
+embed_size: 512
+num_classes: 10000
+scale: 64
+margin: 0.5

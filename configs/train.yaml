@@ -1,0 +1,10 @@
+defaults:
+  - model: model
+  - opt: adam
+  - dataset: img_dataset
+  - scheduler: onecyclelr
+  - loss: arcface
+
+training:
+  epochs: 50
+  batch_size: 64
