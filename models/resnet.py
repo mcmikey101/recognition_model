@@ -1,16 +1,15 @@
-import torch
 from torch import nn
 from torchvision import models
 
 class ResNetModel(nn.Module):
-    def __init__(self, model_type='resnet50', output_shape=512, pretrained=False):
+    def __init__(self, model_type='resnet50', output_shape=512, weights=None):
         super().__init__()
         if model_type == "resnet18":
-            self.model = models.resnet18(pretrained=pretrained)
+            self.model = models.resnet18(weights=weights)
         elif model_type == "resnet34":
-            self.model = models.resnet34(pretrained=pretrained)
+            self.model = models.resnet34(weights=weights)
         elif model_type == "resnet50":
-            self.model = models.resnet50(pretrained=pretrained)
+            self.model = models.resnet50(weights=weights)
         else:
             raise NotImplementedError 
         

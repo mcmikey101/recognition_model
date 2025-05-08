@@ -1,3 +1,4 @@
+import mxnet
 from mxnet import recordio
 from torch.utils.data import Dataset
 from PIL import Image
@@ -12,6 +13,7 @@ class ImgDataset(Dataset):
         self.keys = sorted(self.reader.keys)
         self.transform = transform
         self.preprocessor = Preprocessor(yolo_path, dlib_path)
+        pass
 
     def __len__(self):
         return len(self.keys)
@@ -29,3 +31,6 @@ class ImgDataset(Dataset):
             img = self.transform(img)
         
         return img, label
+    
+if __name__ == '__main__':
+    print(mxnet.__version__)

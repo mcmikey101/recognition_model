@@ -1,10 +1,13 @@
 defaults:
+  - _self_
   - model: model
   - opt: adam
-  - dataset: img_dataset
   - scheduler: onecyclelr
   - loss: arcface
+  - train_dataset: dataset
+  - val_dataset: dataset
 
 training:
   epochs: 50
   batch_size: 64
+  save_path: 'path'

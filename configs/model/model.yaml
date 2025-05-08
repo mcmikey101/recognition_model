@@ -1,4 +1,4 @@
 _target_: models.resnet.ResNetModel
 model_type: "resnet50"
 output_shape: 512
-pretrained: False
+weights: null
