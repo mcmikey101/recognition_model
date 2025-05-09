@@ -5,7 +5,7 @@ from imutils import face_utils
 from ultralytics import YOLO
 import math
 
-class Preprocessor:
+class Aligner:
     def __init__(self, yolo_model, dlib_model, target_size=112):
         self.detect = YOLO(yolo_model, verbose=False)
         self.predictor = dlib.shape_predictor(dlib_model)
@@ -34,7 +34,7 @@ class Preprocessor:
         cropped = imutils.rotate(cropped, 180 + alpha)
         return cv2.resize(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB), (112, 112))
 
-    def preprocess(self, image):
+    def __call__(self, image):
         box = self.detect_faces(image)
         aligned = self.align_face(image, box[0])
         return aligned

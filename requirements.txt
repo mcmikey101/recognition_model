@@ -4,7 +4,6 @@ charset-normalizer==3.4.2
 colorama==0.4.6
 contourpy==1.3.0
 cycler==0.12.1
-dlib==19.24.8
 filelock==3.18.0
 fonttools==4.57.0
 fsspec==2025.3.2
@@ -18,7 +17,7 @@ kiwisolver==1.4.7
 MarkupSafe==3.0.2
 matplotlib==3.9.4
 mpmath==1.3.0
-mxnet==1.6.0
+mxnet
 networkx==3.2.1
 numpy==1.23.5
 omegaconf==2.3.0

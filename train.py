@@ -32,18 +32,18 @@ def val_epoch(val_data, model, lossfn):
 
     return epoch_loss / len(val_data)
 
-@hydra.main(config_path="../configs", config_name="train")
+@hydra.main(config_path="./configs", config_name="train")
 def main(cfg: DictConfig):
-    train_dataset = instantiate(cfg.dataset)
-    val_dataset = instantiate(cfg.dataset)
+    train_dataset = instantiate(cfg.train_dataset)
+    val_dataset = instantiate(cfg.val_dataset)
+
+    train_dataloader = DataLoader(train_dataset, batch_size=cfg.training.batch)
+    val_dataloader = DataLoader(val_dataset, batch_size=cfg.training.batch)
 
     model = instantiate(cfg.model)
     opt = instantiate(cfg.opt, params=model.parameters())
     scheduler = instantiate(cfg.scheduler, optimizer=opt, total_steps=cfg.training.epochs * len(train_dataset))
     loss = instantiate(cfg.loss)
-
-    train_dataloader = DataLoader(train_dataset, batch_size=cfg.training.batch)
-    val_dataloader = DataLoader(val_dataset, batch_size=cfg.training.batch)
     
     for epoch in range(cfg.training.epochs):
         train_loss = train_epoch(train_dataloader, model, opt, scheduler, loss)

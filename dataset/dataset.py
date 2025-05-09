@@ -1,36 +1,23 @@
-import mxnet
-from mxnet import recordio
 from torch.utils.data import Dataset
 from PIL import Image
 import numpy as np
-from preprocessing.preprocessing import Preprocessor
+import os
+import cv2
 
 class ImgDataset(Dataset):
-    def __init__(self, rec_path, idx_path, yolo_path, dlib_path, transform=None):
-        self.rec_path = rec_path
-        self.idx_path = idx_path
-        self.reader = recordio.MXIndexedRecordIO(self.idx_path, self.rec_path, 'r')
-        self.keys = sorted(self.reader.keys)
+    def __init__(self, images_path, transform=None):
+        self.images_path = images_path
+        self.images = sorted(os.listdir(images_path))
         self.transform = transform
-        self.preprocessor = Preprocessor(yolo_path, dlib_path)
-        pass
 
     def __len__(self):
-        return len(self.keys)
+        return len(os.listdir(self.images_path))
 
     def __getitem__(self, index):
-        key = self.keys[index + 1]
-        record = self.reader.read_idx(key)
-
-        header, img = recordio.unpack_img(record, iscolor=1)
-        img = self.preprocessor.preprocess(img)
+        img = cv2.imread(os.path.join(self.images_path, self.images[index]))
         img = Image.fromarray(img.astype(np.uint8))
-        label = int(header.label)
-
         if self.transform:
             img = self.transform(img)
-        
+        label = sorted(os.listdir(self.images_path))[index].split('_')[0]
         return img, label
     
-if __name__ == '__main__':
-    print(mxnet.__version__)

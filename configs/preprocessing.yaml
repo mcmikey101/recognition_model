@@ -1,0 +1,5 @@
+rec_path: C:\Users\user\Desktop\tempo\faces_webface_112x112\faces_webface_112x112\train.rec
+idx_path: C:\Users\user\Desktop\tempo\faces_webface_112x112\faces_webface_112x112\train.idx
+yolo_path: C:\Users\user\Desktop\projects\recognition_model\weights\yolo.pt
+dlib_path: C:\Users\user\Desktop\projects\recognition_model\weights\dlib_predictor.dat
+save_path: C:\Users\user\Desktop\projects\recognition_model\processed_images
