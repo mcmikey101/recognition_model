@@ -36,5 +36,7 @@ class Aligner:
 
     def __call__(self, image):
         box = self.detect_faces(image)
-        aligned = self.align_face(image, box[0])
-        return aligned
+        if len(box) == 1:
+            aligned = self.align_face(image, box[0])
+            return True, aligned
+        return False, image

@@ -9,5 +9,5 @@ defaults:
 
 training:
   epochs: 50
-  batch_size: 64
-  save_path: 'path'
+  batch_size: 128
+  save_path: 'recognition_model/saved_models'

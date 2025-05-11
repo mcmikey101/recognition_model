@@ -15,5 +15,6 @@ dist/
 
 weights
 outputs
+processed_images
 
 .DS_Store

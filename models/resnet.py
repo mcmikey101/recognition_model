@@ -2,7 +2,7 @@ from torch import nn
 from torchvision import models
 
 class ResNetModel(nn.Module):
-    def __init__(self, model_type='resnet50', output_shape=512, weights=None):
+    def __init__(self, output_classes, model_type='resnet50', output_embedding=512, weights=None):
         super().__init__()
         if model_type == "resnet18":
             self.model = models.resnet18(weights=weights)
@@ -13,9 +13,9 @@ class ResNetModel(nn.Module):
         else:
             raise NotImplementedError 
         
-        self.output_shape = output_shape
+        self.output_embedding = output_embedding
 
-        self.model.fc = nn.Linear(self.model.fc.in_features, self.output_shape)
+        self.model.fc = nn.Linear(self.model.fc.in_features, self.output_embedding)
 
     def forward(self, x):
         return self.model(x)
