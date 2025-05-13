@@ -1,5 +1,5 @@
 _target_: dataset.dataset.ImgDataset
-images_path: C:\Users\user\Desktop\projects\recognition_model\processed_images
+images_path: recognition_model\processed_images
 transform:
   _target_: torchvision.transforms.Compose
   transforms:
